@@ -1,5 +1,5 @@
 var app = angular.module('funeral-tribute', ['ui.router']);
-app.constant('SERVER_URL', 'http://localhost:1967/api');
+app.constant('SERVER_URL', 'https://pa-ipinimo-tribute.herokuapp.com/api');
 
 /*
 app.service('Session', function () {
