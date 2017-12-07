@@ -1,3 +1,3 @@
 class Constants:
-    DB_CONNECTION_URL = 'mongodb://localhost:27017/'
-    DB_NAME = 'pa-ipinimo-funeral-webapp'
+    DB_CONNECTION_URL = 'mongodb://funs:neral@ds033196.mlab.com:33196/funeral-tribute'
+    DB_NAME = 'funeral-tribute'
