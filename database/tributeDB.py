@@ -1,3 +1,4 @@
+import pymongo
 from pymongo import MongoClient
 from models.tribute import Tribute
 from utils.constants import Constants
@@ -35,12 +36,12 @@ class TributeDB:
             client = MongoClient(Constants.DB_CONNECTION_URL)
             document = client[Constants.DB_NAME][TributeDB.COLLECTION_NAME]
 
-            tributes = document.find({})
+            tributes = document.find({}).sort([("dateAdded", pymongo.DESCENDING)])
             all_tributes = []
 
             for t in tributes:
                 tribute_obj = Tribute(t['name'], t['content'], t['dateAdded'])
-                all_tributes.append(t)
+                all_tributes.append(tribute_obj)
 
             client.close()
             return all_tributes
