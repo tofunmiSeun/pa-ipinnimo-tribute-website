@@ -6,5 +6,9 @@ app = Flask(__name__)
 def serve_index_page():
     return send_file('index.html')
 
+@app.route('/add-tribute')
+def serve_index_page():
+    return send_file('add-tribute.html')
+
 if __name__ == '__main__':
     app.run('127.0.0.1', 1967, True)
