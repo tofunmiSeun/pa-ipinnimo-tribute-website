@@ -42,6 +42,10 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             var successHandler = function (response) {
                 var successMessage = "Your tribute has been posted successfully.";
                 $scope.setSuccessMessage(successMessage);
+
+                $scope.newTributeObject.name = "";
+                $scope.newTributeObject.content = "";
+
                 $scope.getTributes();
             };
 
