@@ -31,6 +31,29 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             tributesService.getAllTributes(successHandler, errorHandler);
         };
 
+        $scope.addNewTribute = function () {
+            $scope.clearAllMessages();
+
+            var tributeObj = {
+                content: $scope.newTributeObject.content,
+                name: $scope.newTributeObject.name
+            };
+
+            var successHandler = function (response) {
+                var successMessage = "Your tribute has been posted successfully.";
+                $scope.setSuccessMessage(successMessage);
+                $scope.getTributes();
+            };
+
+            var errorHandler = function (response) {
+                var errorMessage = "An error occurred while trying to post your tribute. Please try again.";
+                $scope.setErrorMessage(errorMessage);
+                console.log(response)
+            };
+
+            tributesService.addTribute(tributeObj, successHandler, errorHandler);
+        };
+
 
         /* ERROR AND SUCCESS MESSAGES */
 
@@ -57,7 +80,13 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
     }]);
 
 app.service('tributesService', ['$http', 'SERVER_URL', function ($http, SERVER_URL) {
+    // GET ALL TRIBUTES
     this.getAllTributes = function (successHandler, errorHandler) {
         $http.get(SERVER_URL + '/tributes/all').then(successHandler, errorHandler);
     }
+
+    // ADD NEW TRIBUTE
+    this.addTribute = function (tributeObject, successHandler, errorHandler) {
+        $http.post(SERVER_URL + "/tribute", tributeObject).then(successHandler, errorHandler);
+    };
 }]);
