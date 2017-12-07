@@ -1,7 +1,7 @@
 from pymongo import MongoClient
-from bson.objectid import ObjectId
 from models.tribute import Tribute
 from utils.constants import Constants
+import time
 
 
 class TributeDB:
@@ -10,10 +10,13 @@ class TributeDB:
     @staticmethod
     def add_new_tribute(tribute_object):
         try:
+
+            now = int(round(time.time() * 1000))
+
             obj = {
                 'name': tribute_object['name'],
                 'content': tribute_object['content'],
-                'dateAdded': tribute_object['dateAdded']
+                'dateAdded': now
             }
 
             client = MongoClient(Constants.DB_CONNECTION_URL)
@@ -36,12 +39,7 @@ class TributeDB:
             all_tributes = []
 
             for t in tributes:
-                tribute_obj = {
-                    'name': t['name'],
-                    'content': t['content'],
-                    'dateAdded': t['dateAdded']
-                }
-
+                tribute_obj = Tribute(t['name'], t['content'], t['dateAdded'])
                 all_tributes.append(t)
 
             client.close()

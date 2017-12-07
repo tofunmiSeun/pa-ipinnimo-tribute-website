@@ -83,7 +83,7 @@ app.service('tributesService', ['$http', 'SERVER_URL', function ($http, SERVER_U
     // GET ALL TRIBUTES
     this.getAllTributes = function (successHandler, errorHandler) {
         $http.get(SERVER_URL + '/tributes/all').then(successHandler, errorHandler);
-    }
+    };
 
     // ADD NEW TRIBUTE
     this.addTribute = function (tributeObject, successHandler, errorHandler) {
