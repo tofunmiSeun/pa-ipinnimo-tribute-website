@@ -45,8 +45,8 @@
             display: block;
             right: 0;
             bottom: 0;
-            margin-right: 40px;
-            margin-bottom: 40px;
+            margin-right: 10px;
+            margin-bottom: 30px;
             z-index: 900;
         }
 
@@ -80,12 +80,12 @@
 
 </head>
 <body ng-controller="tributesController" style="padding-bottom: 50px;">
-<ul class="nav justify-content-end" style="padding: 10px 30px;">
+<ul class="nav justify-content-end" style="background-color: rgba(0, 40, 79, 0.7); padding: 10px 30px;">
     <li class="nav-item">
-        <a class="nav-link active" style="color: #007bff;  font-weight: bold;" href="index.html">Home</a>
+        <a class="nav-link active" style="color: #ffffff;  font-weight: bold;" href="index.html">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" style="color: #007bff; font-weight: bold;" href="add-tribute.html">All Tributes</a>
+        <a class="nav-link" style="color: #ffffff; font-weight: bold;" href="add-tribute.html">Tributes</a>
     </li>
 </ul>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -117,9 +117,10 @@
 <div align="center" style="max-width: 1790px; height: auto;">
     <div>
         <h3 style="padding: 20px;">Biography</h3>
+        <hr class="style-eight">
     </div>
-    <div style="padding: 40px 10px; background-color: #efefef;">
-        <div style="text-align: left; max-width: 1200px;">
+    <div style="padding: 40px 10px;">
+        <div style="text-align: justify; max-width: 1200px;">
             <p>
                 Excepteur reprehenderit sint exercitation ipsum consequat qui sit id velit elit. Velit anim eiusmod
                 labore
@@ -269,7 +270,7 @@
 </div>
 <a href="add-tribute.html" id="add-tribute">
     <input type="submit" Value="Add Tribute"
-           style="background-color: #007bff; width: 100px; height: 100px; border-radius: 50%; color: white;">
+           style="background-color: rgba(0, 40, 79, 0.9); color: white; width: 100px; height: 100px; border-radius: 50%;"/>
 </a>
 </body>
 </html>
