@@ -37,6 +37,26 @@
 
 <body ng-controller="tributesController" ng-init="init()"
       style="background-color: rgba(0, 40, 79, 0.9); padding: 10px; padding-bottom: 80px;">
+
+<div style="box-shadow: 2px 2px gainsboro; width: 200px; position: fixed; top: 30px; right: 20px;"
+     ng-if="successMessage"
+     class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ successMessage }}
+</div>
+<!-- SUCCESS MESSAGE ALERT -->
+
+<div style="box-shadow: 2px 2px gainsboro; width: 200px; position: fixed; top: 30px; right: 20px;" ng-if="errorMessage"
+     class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ errorMessage }}
+</div>
+<!-- ERROR MESSAGE ALERT -->
+
 <div class="demo-back">
     <a href="index.html" title="go back" role="button">
         <i class="material-icons" role="presentation" style="color: #F5F5F5; margin-top: 20px; margin-left: 20px;">arrow_back</i>
@@ -44,7 +64,7 @@
 </div>
 
 <div style="padding-top: 70px;">
-    <div style="max-width: 1200px; background-color: #F5F5F5; padding: 10px; margin: 0 auto;">
+    <div style="max-width: 1200px; background-color: #F5F5F5; padding: 10px; padding-bottom: 30px; margin: 0 auto;">
         <h3 class="lead" style="font-size: 1.5em; font-weight: 700; text-align: center;">Add your tribute</h3>
         <div style="margin-left: auto; margin-right: auto;">
             <form>
@@ -54,18 +74,19 @@
                       placeholder="Name"></textarea>
                 </div>
                 <br>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" style="width: 700px; margin-left: 20px; margin-bottom: 10px;"
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 90%">
+            <textarea class="mdl-textfield__input" style="min-width: 400px; margin-left: 20px; margin-bottom: 10px;"
                       ng-model="newTributeObject.content"
                       placeholder="Add tribute"></textarea>
                 </div>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
                         ng-click="addNewTribute()"
                         ng-disabled="newTributeObject.name.length < 2 || newTributeObject.content.length < 5"
-                        style="border-radius: 50%; height: 40px; width: 45px; background-color: #A9A9A9; margin-left: 45%; margin-top: -95px;">
+                        style="border-radius: 50%; height: 40px; width: 45px; background-color: #A9A9A9; margin-left: 45%;">
                     <i class="material-icons" role="presentation" style="color: #696969;">check</i><span
                         class="visuallyhidden">add tribute</span>
                 </button>
+                <p ng-if="addTributesLoading" style="text-align: center;" class="lead">Sending...</p>
             </form>
         </div>
     </div>
@@ -74,6 +95,9 @@
 <div style="padding-top: 70px;">
     <div style="max-width: 1200px; background-color: #F5F5F5; padding: 10px; margin: 0 auto;">
         <h3 class="lead" style="font-size: 1.5em; font-weight: 700; text-align: center;">All Tributes</h3>
+        <p ng-if="getTributesLoading" style="text-align: center;" class="lead">Loading...</p>
+        <p ng-if="!getTributesLoading && !errorMessage && allTributes.length == 0" style="text-align: center;"
+           class="lead">No tribute posted yet, be the first to post</p>
         <div class="row" style="padding: 7px;">
             <div ng-repeat="tribute in allTributes" class="col col-md-6 col-lg-6 col-sm-12 col-xs-12"
                  style="margin: 0; padding: 0;">
@@ -90,28 +114,28 @@
 
     </div>
     <div>
-    <table style="max-width: 1200px; margin: 30px auto;">
-        <tr>
-            <td>
-                <a href="#" style="text-decoration: none; color: #F5F5F5;">
-                    <button role="presentation"
-                            style=" border-radius: 50%; height: 40px; width: 45px; margin-top: 25px;">
-                        <i class="material-icons" style="margin-left: 8%; color: #00284F;">arrow_back</i>
-                    </button>
-                </a>
-            </td>
-            <td width="95%"></td>
-            <td>
-                <a href="#" style="text-decoration: none; color: #F5F5F5;">
-                    <button role="presentation"
-                            style=" border-radius: 50%; height: 40px; width: 45px; margin-top: 25px;">
-                        <i class="material-icons" style="margin-left: 11%; color: #00284F;">arrow_forward</i>
-                    </button>
-                </a>
-            </td>
-        </tr>
-    </table>
-</div>
+        <table style="max-width: 1200px; margin: 30px auto;">
+            <tr>
+                <td>
+                    <a href="#" style="text-decoration: none; color: #F5F5F5;">
+                        <button role="presentation"
+                                style=" border-radius: 50%; height: 40px; width: 45px; margin-top: 25px;">
+                            <i class="material-icons" style="margin-left: 8%; color: #00284F;">arrow_back</i>
+                        </button>
+                    </a>
+                </td>
+                <td width="95%"></td>
+                <td>
+                    <a href="#" style="text-decoration: none; color: #F5F5F5;">
+                        <button role="presentation"
+                                style=" border-radius: 50%; height: 40px; width: 45px; margin-top: 25px;">
+                            <i class="material-icons" style="margin-left: 11%; color: #00284F;">arrow_forward</i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 </body>
 

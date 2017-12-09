@@ -12,7 +12,7 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             $scope.getTributes();
         };
 
-        $scope.getTributesLoading = true;
+        $scope.getTributesLoading = false;
         $scope.getTributes = function () {
             $scope.clearAllMessages();
             $scope.getTributesLoading = true;
@@ -23,7 +23,7 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             };
 
             var errorHandler = function (response) {
-                $scope.setErrorMessage("Error trying to get courses.");
+                $scope.setErrorMessage("Error trying to get posted tributes.");
                 $scope.getTributesLoading = false;
                 console.log(response)
             };
@@ -31,8 +31,10 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             tributesService.getAllTributes(successHandler, errorHandler);
         };
 
+        $scope.addTributesLoading = false;
         $scope.addNewTribute = function () {
             $scope.clearAllMessages();
+            $scope.addTributesLoading = true;
 
             var tributeObj = {
                 content: $scope.newTributeObject.content,
@@ -40,6 +42,8 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             };
 
             var successHandler = function (response) {
+                $scope.addTributesLoading = false;
+
                 var successMessage = "Your tribute has been posted successfully.";
                 $scope.setSuccessMessage(successMessage);
 
@@ -50,6 +54,8 @@ app.controller('tributesController', ['$scope', '$state', 'tributesService',
             };
 
             var errorHandler = function (response) {
+                $scope.addTributesLoading = false;
+
                 var errorMessage = "An error occurred while trying to post your tribute. Please try again.";
                 $scope.setErrorMessage(errorMessage);
                 console.log(response)
